@@ -1,9 +1,7 @@
-import { Component } from "react";
-import PropTypes from "prop-types";
-import { v4 as uuidv4 } from "uuid";
-import { connect } from "react-redux";
+import React, { Component } from "react";
 import s from "../ContactList/phonebook.module.css";
-import actions from "../../redux/contacts/contacts-action";
+import { connect } from "react-redux";
+import { addContacts } from "../../redux/contacts/contacts-actions";
 
 class ContactForm extends Component {
   state = {
@@ -38,7 +36,7 @@ class ContactForm extends Component {
           <label className={s.label}>
             Name
             <input
-              id={uuidv4()}
+              // id={uuidv4()}
               value={this.state.name}
               onChange={this.handleChange}
               type="text"
@@ -50,7 +48,7 @@ class ContactForm extends Component {
           <label className={s.label}>
             Number
             <input
-              id={uuidv4()}
+              // id={uuidv4()}
               value={this.state.number}
               onChange={this.handleChange}
               type="text"
@@ -70,7 +68,7 @@ class ContactForm extends Component {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  addNewContact: (contact) => dispatch(actions.addContact(contact)),
+  addNewContact: (contact) => dispatch(addContacts(contact)),
 });
     
 export default connect(null, mapDispatchToProps) (ContactForm);

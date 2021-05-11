@@ -12,12 +12,12 @@ import { v4 as uuidv4 } from "uuid";
 // });
 
 //стало
-const addContact = createAction('contacts/addContacts', data => ({
-  payload: {
-    id: uuidv4(),
-    name: data.name,
-    number: data.number
-  },
+const addContacts = createAction('contacts/add', values => ({
+    payload: {
+        id: uuidv4(),
+        name: values.name,
+        number: values.number
+    },
 }));
 
 //було 
@@ -30,7 +30,8 @@ const addContact = createAction('contacts/addContacts', data => ({
 // };
 
 //стало
-const deleteContact = createAction('contacts/deleContacts');
+const deleteContacts = createAction('contacts/delete');
 const filterContacts = createAction('contacts/filterContacts');
 
-export default { addContact, deleteContact, filterContacts };
+
+export { addContacts, deleteContacts, filterContacts };

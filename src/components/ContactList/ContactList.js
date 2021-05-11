@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import s from "../ContactList/phonebook.module.css";
-import actions from "../../redux/contacts/contacts-action";
+import { deleteContacts } from "../../redux/contacts/contacts-actions";
 
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ol>
+    <ol className={s.contactList}>
       {contacts.map(({ id, name, number }) => (
         <li className={s.list} key={id}>
           <p className={s.text}>{name}, </p>
@@ -29,10 +29,10 @@ ContactList.propTypes = {
   onDeleteContact: PropTypes.func.isRequired,
 };
 
-const showFilteredContacts = (contacts, filter) => {
+const showFilteredContacts = (allContacts, filter) => {
   const normalizedFilter = filter.toLowerCase();
-  return contacts.filter((contact) =>
-     contact.name.includes(normalizedFilter)
+  return allContacts.filter((contact) =>
+    contact.name.toLowerCase().includes(normalizedFilter)
   );
 };
 
@@ -44,7 +44,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onDeleteContact: id => dispatch(actions.deleteContact(id)),
+  onDeleteContact: (id) => dispatch(deleteContacts(id)),
 });
-    
-export default connect(mapStateToProps,mapDispatchToProps) (ContactList);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
